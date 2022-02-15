@@ -29,7 +29,7 @@ public class SelecetBlock {
         String number="0xf4240";
 
         List<Blockbynumber> byNumber = blockSelecetService.findByNumber(number);
-        log.info("Test 用HASH查到的block信息为：{}",byNumber);
+        log.info("Test 用Number查到的block信息为：{}",byNumber);
 
     }
     @Test
