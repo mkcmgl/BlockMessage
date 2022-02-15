@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.inspur.ethereumtest.mapper.BlockbynumberMapper" >
+  <resultMap id="BaseResultMap" type="com.inspur.ethereumtest.pojo.Blockbynumber" >
+    <id column="height" property="height" jdbcType="VARCHAR" />
+    <result column="timestamp" property="timestamp" jdbcType="VARCHAR" />
+    <result column="transactions" property="transactions" jdbcType="VARCHAR" />
+    <result column="miner" property="miner" jdbcType="VARCHAR" />
+    <result column="uncles" property="uncles" jdbcType="VARCHAR" />
+    <result column="difficulty" property="difficulty" jdbcType="VARCHAR" />
+    <result column="totalDifficulty" property="totaldifficulty" jdbcType="VARCHAR" />
+    <result column="size" property="size" jdbcType="VARCHAR" />
+    <result column="gasUsed" property="gasused" jdbcType="VARCHAR" />
+    <result column="gasLimit" property="gaslimit" jdbcType="VARCHAR" />
+    <result column="extraData" property="extradata" jdbcType="VARCHAR" />
+    <result column="hash" property="hash" jdbcType="VARCHAR" />
+    <result column="parentHash" property="parenthash" jdbcType="VARCHAR" />
+    <result column="sha3Uncles" property="sha3uncles" jdbcType="VARCHAR" />
+    <result column="stateRoot" property="stateroot" jdbcType="VARCHAR" />
+    <result column="nonce" property="nonce" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="transactionsRoot" property="transactionsroot" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    height, timestamp, transactions, miner, uncles, difficulty, totalDifficulty, size, 
+    gasUsed, gasLimit, extraData, hash, parentHash, sha3Uncles, stateRoot, nonce, number, 
+    transactionsRoot
+  </sql>
+   <select id="selectByNumber" resultMap="BaseResultMap" parameterType="java.lang.String">
+  select
+  <include refid="Base_Column_List"/>
+  from blockbynumber
+  where number = #{number,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByHash" resultType="com.inspur.ethereumtest.pojo.Blockbynumber">
+    select
+    <include refid="Base_Column_List"/>
+    from blockbynumber
+    where hash = #{hash,jdbcType=VARCHAR}
+
+  </select>
+
+  <!--<select id="selectByNumber" resultMap="BaseResultMap" parameterType="com.inspur.ethereumtest.pojo.BlockbynumberExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from blockbynumber-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from blockbynumber
+    where height = #{height,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from blockbynumber
+    where height = #{height,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.inspur.ethereumtest.pojo.BlockbynumberExample" >
+    delete from blockbynumber
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.inspur.ethereumtest.pojo.Blockbynumber" >
+    insert into blockbynumber (height, timestamp, transactions, 
+      miner, uncles, difficulty, 
+      totalDifficulty, size, gasUsed, 
+      gasLimit, extraData, hash, 
+      parentHash, sha3Uncles, stateRoot, 
+      nonce, number, transactionsRoot
+      )
+    values (#{height,jdbcType=VARCHAR}, #{timestamp,jdbcType=VARCHAR}, #{transactions,jdbcType=VARCHAR}, 
+      #{miner,jdbcType=VARCHAR}, #{uncles,jdbcType=VARCHAR}, #{difficulty,jdbcType=VARCHAR}, 
+      #{totaldifficulty,jdbcType=VARCHAR}, #{size,jdbcType=VARCHAR}, #{gasused,jdbcType=VARCHAR}, 
+      #{gaslimit,jdbcType=VARCHAR}, #{extradata,jdbcType=VARCHAR}, #{hash,jdbcType=VARCHAR}, 
+      #{parenthash,jdbcType=VARCHAR}, #{sha3uncles,jdbcType=VARCHAR}, #{stateroot,jdbcType=VARCHAR}, 
+      #{nonce,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, #{transactionsroot,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.inspur.ethereumtest.pojo.Blockbynumber" >
+    insert into blockbynumber
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="height != null" >
+        height,
+      </if>
+      <if test="timestamp != null" >
+        timestamp,
+      </if>
+      <if test="transactions != null" >
+        transactions,
+      </if>
+      <if test="miner != null" >
+        miner,
+      </if>
+      <if test="uncles != null" >
+        uncles,
+      </if>
+      <if test="difficulty != null" >
+        difficulty,
+      </if>
+      <if test="totaldifficulty != null" >
+        totalDifficulty,
+      </if>
+      <if test="size != null" >
+        size,
+      </if>
+      <if test="gasused != null" >
+        gasUsed,
+      </if>
+      <if test="gaslimit != null" >
+        gasLimit,
+      </if>
+      <if test="extradata != null" >
+        extraData,
+      </if>
+      <if test="hash != null" >
+        hash,
+      </if>
+      <if test="parenthash != null" >
+        parentHash,
+      </if>
+      <if test="sha3uncles != null" >
+        sha3Uncles,
+      </if>
+      <if test="stateroot != null" >
+        stateRoot,
+      </if>
+      <if test="nonce != null" >
+        nonce,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="transactionsroot != null" >
+        transactionsRoot,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="height != null" >
+        #{height,jdbcType=VARCHAR},
+      </if>
+      <if test="timestamp != null" >
+        #{timestamp,jdbcType=VARCHAR},
+      </if>
+      <if test="transactions != null" >
+        #{transactions,jdbcType=VARCHAR},
+      </if>
+      <if test="miner != null" >
+        #{miner,jdbcType=VARCHAR},
+      </if>
+      <if test="uncles != null" >
+        #{uncles,jdbcType=VARCHAR},
+      </if>
+      <if test="difficulty != null" >
+        #{difficulty,jdbcType=VARCHAR},
+      </if>
+      <if test="totaldifficulty != null" >
+        #{totaldifficulty,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="gasused != null" >
+        #{gasused,jdbcType=VARCHAR},
+      </if>
+      <if test="gaslimit != null" >
+        #{gaslimit,jdbcType=VARCHAR},
+      </if>
+      <if test="extradata != null" >
+        #{extradata,jdbcType=VARCHAR},
+      </if>
+      <if test="hash != null" >
+        #{hash,jdbcType=VARCHAR},
+      </if>
+      <if test="parenthash != null" >
+        #{parenthash,jdbcType=VARCHAR},
+      </if>
+      <if test="sha3uncles != null" >
+        #{sha3uncles,jdbcType=VARCHAR},
+      </if>
+      <if test="stateroot != null" >
+        #{stateroot,jdbcType=VARCHAR},
+      </if>
+      <if test="nonce != null" >
+        #{nonce,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionsroot != null" >
+        #{transactionsroot,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.inspur.ethereumtest.pojo.BlockbynumberExample" resultType="java.lang.Integer" >
+    select count(*) from blockbynumber
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+
+  <update id="updateByExampleSelective" parameterType="map" >
+    update blockbynumber
+    <set >
+      <if test="record.height != null" >
+        height = #{record.height,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timestamp != null" >
+        timestamp = #{record.timestamp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transactions != null" >
+        transactions = #{record.transactions,jdbcType=VARCHAR},
+      </if>
+      <if test="record.miner != null" >
+        miner = #{record.miner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uncles != null" >
+        uncles = #{record.uncles,jdbcType=VARCHAR},
+      </if>
+      <if test="record.difficulty != null" >
+        difficulty = #{record.difficulty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totaldifficulty != null" >
+        totalDifficulty = #{record.totaldifficulty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.size != null" >
+        size = #{record.size,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gasused != null" >
+        gasUsed = #{record.gasused,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gaslimit != null" >
+        gasLimit = #{record.gaslimit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extradata != null" >
+        extraData = #{record.extradata,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hash != null" >
+        hash = #{record.hash,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parenthash != null" >
+        parentHash = #{record.parenthash,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sha3uncles != null" >
+        sha3Uncles = #{record.sha3uncles,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stateroot != null" >
+        stateRoot = #{record.stateroot,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nonce != null" >
+        nonce = #{record.nonce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transactionsroot != null" >
+        transactionsRoot = #{record.transactionsroot,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update blockbynumber
+    set height = #{record.height,jdbcType=VARCHAR},
+      timestamp = #{record.timestamp,jdbcType=VARCHAR},
+      transactions = #{record.transactions,jdbcType=VARCHAR},
+      miner = #{record.miner,jdbcType=VARCHAR},
+      uncles = #{record.uncles,jdbcType=VARCHAR},
+      difficulty = #{record.difficulty,jdbcType=VARCHAR},
+      totalDifficulty = #{record.totaldifficulty,jdbcType=VARCHAR},
+      size = #{record.size,jdbcType=VARCHAR},
+      gasUsed = #{record.gasused,jdbcType=VARCHAR},
+      gasLimit = #{record.gaslimit,jdbcType=VARCHAR},
+      extraData = #{record.extradata,jdbcType=VARCHAR},
+      hash = #{record.hash,jdbcType=VARCHAR},
+      parentHash = #{record.parenthash,jdbcType=VARCHAR},
+      sha3Uncles = #{record.sha3uncles,jdbcType=VARCHAR},
+      stateRoot = #{record.stateroot,jdbcType=VARCHAR},
+      nonce = #{record.nonce,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=VARCHAR},
+      transactionsRoot = #{record.transactionsroot,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.inspur.ethereumtest.pojo.Blockbynumber" >
+    update blockbynumber
+    <set >
+      <if test="timestamp != null" >
+        timestamp = #{timestamp,jdbcType=VARCHAR},
+      </if>
+      <if test="transactions != null" >
+        transactions = #{transactions,jdbcType=VARCHAR},
+      </if>
+      <if test="miner != null" >
+        miner = #{miner,jdbcType=VARCHAR},
+      </if>
+      <if test="uncles != null" >
+        uncles = #{uncles,jdbcType=VARCHAR},
+      </if>
+      <if test="difficulty != null" >
+        difficulty = #{difficulty,jdbcType=VARCHAR},
+      </if>
+      <if test="totaldifficulty != null" >
+        totalDifficulty = #{totaldifficulty,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        size = #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="gasused != null" >
+        gasUsed = #{gasused,jdbcType=VARCHAR},
+      </if>
+      <if test="gaslimit != null" >
+        gasLimit = #{gaslimit,jdbcType=VARCHAR},
+      </if>
+      <if test="extradata != null" >
+        extraData = #{extradata,jdbcType=VARCHAR},
+      </if>
+      <if test="hash != null" >
+        hash = #{hash,jdbcType=VARCHAR},
+      </if>
+      <if test="parenthash != null" >
+        parentHash = #{parenthash,jdbcType=VARCHAR},
+      </if>
+      <if test="sha3uncles != null" >
+        sha3Uncles = #{sha3uncles,jdbcType=VARCHAR},
+      </if>
+      <if test="stateroot != null" >
+        stateRoot = #{stateroot,jdbcType=VARCHAR},
+      </if>
+      <if test="nonce != null" >
+        nonce = #{nonce,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionsroot != null" >
+        transactionsRoot = #{transactionsroot,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where height = #{height,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.inspur.ethereumtest.pojo.Blockbynumber" >
+    update blockbynumber
+    set timestamp = #{timestamp,jdbcType=VARCHAR},
+      transactions = #{transactions,jdbcType=VARCHAR},
+      miner = #{miner,jdbcType=VARCHAR},
+      uncles = #{uncles,jdbcType=VARCHAR},
+      difficulty = #{difficulty,jdbcType=VARCHAR},
+      totalDifficulty = #{totaldifficulty,jdbcType=VARCHAR},
+      size = #{size,jdbcType=VARCHAR},
+      gasUsed = #{gasused,jdbcType=VARCHAR},
+      gasLimit = #{gaslimit,jdbcType=VARCHAR},
+      extraData = #{extradata,jdbcType=VARCHAR},
+      hash = #{hash,jdbcType=VARCHAR},
+      parentHash = #{parenthash,jdbcType=VARCHAR},
+      sha3Uncles = #{sha3uncles,jdbcType=VARCHAR},
+      stateRoot = #{stateroot,jdbcType=VARCHAR},
+      nonce = #{nonce,jdbcType=VARCHAR},
+      number = #{number,jdbcType=VARCHAR},
+      transactionsRoot = #{transactionsroot,jdbcType=VARCHAR}
+    where height = #{height,jdbcType=VARCHAR}
+  </update>
+</mapper>

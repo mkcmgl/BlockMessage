@@ -1,0 +1,16 @@
+mybatis:
+    mapper-locations: classpath:mapper/*.xml
+    type-aliases-package: com.inspur.ethereumtest.pojo
+    configuration:
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+server:
+    port: 8080
+spring:
+    application:
+        name: ethereum-test
+    datasource:
+        driver-class-name: com.mysql.jdbc.Driver
+        name: defaultDataSource
+        password: '990713'
+        url: jdbc:mysql://localhost:3306/ethereum?serverTimezone=UTC
+        username: 'root'

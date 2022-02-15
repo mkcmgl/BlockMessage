@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>标题</title>
+    <script src="https://cdn.staticfile.org/jquery/2.0.0/jquery.min.js">
+    </script>
+    <style type="text/css">
+        input{
+            width:300px;
+            height: 30px;
+            border: 1px solid #7fcc0b;
+            border-right: none;
+            border-radius: 4px;
+        }
+        button{
+            position: relative;
+            right: 2px;
+            width: 50px;
+            height: 35px;
+            font-size: 14px;
+            color: white;
+            background: 5px #7fcc0b;
+            border-radius: 4px;
+        }
+    </style>
+
+    <script>
+        // $(document).ready(function () {
+        //     $(".search").click(function () {
+        //         var num =$("#test").val();
+        //         var  xhr =new XMLHttpRequest();
+        //         xhr.open('POST', window.location.href='/block/test');
+        //         xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+        //         xhr.send('data='+num);
+        //         xhr.onload=function () {
+        //             if (xhr.readyState!==4)return;
+        //             // console.log(xhr.responseText)
+        //         }
+        //     })
+        // })
+        $(document).ready(function () {
+            $(".search").click(function () {
+                var num =$("#test").val();
+                window.location.href="/hello/thymeleaf?data="+num;
+            })
+        })
+
+        $(document).ready(function () {
+            $("button").click(function () {
+                alert ( $("#test").val());
+
+            })
+        })
+        // $(document).ready(function () {
+        //     $("button").click(function () {
+        //         var num = $("#test").val();
+        //         $.ajax({
+        //             url: window.location.href="/block/test",
+        //             data:{aaction:"JQueryAjax"},
+        //             type:"GET",
+        //             success:function (data) {
+        //                 $("#msg").html("ajax编号："+data.id);
+        //             }
+        //              dataType:"json"
+        //         })
+        //     })
+        // })
+
+
+    </script>
+</head>
+
+
+<div class="site-search">
+    <div id="search">
+        <input runat="server" type="text" name="data" id="test" class="text" placeholder="输入BlockHash" />
+        <!--<input type="button" name="button" value="搜索" onclick="print()">-->
+        <button  type="button" onclick="javascript:doSearch();" class="search submit">搜索</button>
+    </div>
+</div>
+
+
+<body>
+
+<p th:each="user: ${byNunmber}"><br/>
+    height:      <span th:text="${user.height}" ></span><br/>
+    timestamp:        <span th:text="${user.timestamp}" ></span><br/>
+    transactions:        <span th:text="${user.transactions}" ></span><br/>
+    miner:        <span th:text="${user.miner}" ></span><br/>
+    uncles:        <span th:text="${user.uncles}" ></span><br/>
+    difficulty:        <span th:text="${user.difficulty}" ></span><br/>
+    totaldifficulty:        <span th:text="${user.totaldifficulty}" ></span><br/>
+    size:       <span th:text="${user.size}" ></span><br/>
+    gasused:         <span th:text="${user.gasused}" ></span><br/>
+    gaslimit:         <span th:text="${user.gaslimit}" ></span><br/>
+    extradata:       <span th:text="${user.extradata}" ></span><br/>
+    hash:        <span th:text="${user.hash}" ></span><br/>
+    parenthash:       <span th:text="${user.parenthash}" ></span><br/>
+    sha3uncles：       <span th:text="${user.sha3uncles}" ></span><br/>
+    nonce：       <span th:text="${user.nonce}" ></span><br/>
+    number：       <span th:text="${user.number}" ></span><br/>
+    transactionsroot：       <span th:text="${user.transactionsroot}" ></span><br/>
+
+
+</p>
+
+
+
+
+</body>
+</html>
