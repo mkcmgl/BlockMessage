@@ -39,15 +39,14 @@ public class BlockSelecetController {
     }
 
     @GetMapping("/number")
-    public ModelAndView getBlockByNumber() {
+    public void getBlockByNumber() {
     String number="0xf4240";
         List<Blockbynumber> byNumber = blockSelecetService.findByNumber(number);
-        ModelAndView modelAndView = new ModelAndView();
+
         List<Blockbynumber> list = blockByService.list();
-        modelAndView.addObject("testList",list);
-        modelAndView.setViewName("test-list");
+
         log.info("查到信息：{}",byNumber.toString());
-        return  modelAndView;
+
 
     }
 

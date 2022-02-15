@@ -29,7 +29,7 @@ import java.net.URLEncoder;
 import java.util.*;
 
 /**
- * @author gonggj
+ * @author mgl
  * @Description: httpclient工具类
  * @date 2021/8/17 14:28
  */
