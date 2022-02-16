@@ -1,6 +1,6 @@
 echo off
 
-set APP_NAME=${project.build.finalName}.jar
+set APP_NAME=ethereum-test-0.0.1-SNAPSHOT.jar
 set LOG_IMPL_FILE=log4j2.xml
 set LOGGING_CONFIG=
 if exist ../config/%LOG_IMPL_FILE% (

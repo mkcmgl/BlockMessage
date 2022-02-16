@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # 项目名称
-SERVER_NAME="${project.artifactId}"
+SERVER_NAME="ethereum-test"
 echo "The $SERVER_NAME :  "
 # jar名称
-JAR_NAME="${project.build.finalName}.jar"
+JAR_NAME="ethereum-test-0.0.1-SNAPSHOT.jar"
 echo "The $JAR_NAME :  "
 
 # 进入bin目录
