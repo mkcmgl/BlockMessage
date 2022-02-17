@@ -11,6 +11,6 @@ spring:
     datasource:
         driver-class-name: com.mysql.jdbc.Driver
         name: defaultDataSource
-        password: '990713'
-        url: jdbc:mysql://localhost:3306/ethereum?serverTimezone=UTC
-        username: 'root'
+        password: 'mysql!QAZ2wsx!@#'
+        url: jdbc:mysql://localhost:3406/ethereum?serverTimezone=UTC
+        username: 'icity'
